@@ -3,14 +3,48 @@
   "version": "1.0.0",
   "description": "A Shell Prompt powered by GEUT",
   "main": "index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tape -r babel-register \"test/**/*.js\" | tap-spec",
+    "posttest": "eslint src",
+    "build": "del-cli dist && babel src --out-dir dist",
+    "dev": "npm run build -- --watch --debug"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.6.5",
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-plugin-transform-object-assign": "^6.5.0",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-register": "^6.7.2",
+    "del-cli": "^0.2.0",
+    "eslint": "^2.6.0",
+    "eslint-config-postcss": "^2.0.2",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.5.1"
+  },
+  "eslintConfig": {
+    "extends": "postcss",
+    "rules": {
+      "max-len": 0
+    }
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ],
+    "plugins": [
+      "transform-object-assign",
+      "add-module-exports"
+    ]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/geut/geutshell.git"
   },
-  "keywords": [],
+  "keywords": ["bash", "prompt"],
   "author": "",
   "license": "ISC",
   "bugs": {
